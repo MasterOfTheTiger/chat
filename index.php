@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+header("X-Frame-Options: DENY");
+header("Content-Security-Policy: frame-ancestors 'none'", false);
+session_start(); 
+?>
 
 <!DOCTYPE html>
 <html>

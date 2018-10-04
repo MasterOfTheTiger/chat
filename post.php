@@ -1,4 +1,6 @@
 <?php
+header("X-Frame-Options: DENY");
+header("Content-Security-Policy: frame-ancestors 'none'", false);
 session_start();
 
 function scrub($input) {
