@@ -1,11 +1,30 @@
 <?php
+session_start();
+
+function scrub($input) {
+    $splitted = explode('<', $input);
+    $splitted = implode('&lt;', $splitted);
+    $splitted = explode('>', $splitted);
+    $splitted = implode('&gt;', $splitted);
+    return $splitted;
+}
+
 date_default_timezone_set("America/New_York");
 $chat = fopen('chat.txt', 'a') or die('Error upon opening file');
 $name = 'anonymous';
 if ($_POST['name'] !== '') {
     $name = $_POST['name'];
 }
-$text = '"' . $_POST['message'] . '" posted by ' . $name . ' at ' . date("Y/m/d H:i:s") . '<br />';
+
+// Scrub user input
+$message = scrub($_POST['message']);
+$name = scrub($_POST['name']);
+
+$_SESSION['name'] = $_POST['name'];
+
+// Add metadata to message
+$text = '"' . $message . '" posted by ' . $name . ' at ' . date("Y/m/d H:i:s") . '<br />';
+
 fwrite($chat, $text);
 fclose($chat);
 ?>

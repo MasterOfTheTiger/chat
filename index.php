@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,7 @@
     </div>
     <form action="post.php" method="POST">
         <p>Name:</p>
-        <input type="text" name="name" />
+        <input type="text" name="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
         <p>Message</p>
         <textarea name="message" rows="4" cols="50"></textarea>
         <br />
