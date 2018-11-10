@@ -27,7 +27,14 @@ $_SESSION['name'] = $_POST['name'];
 // Add metadata to message
 $text = '"' . $message . '" posted by ' . $name . ' at ' . date("Y/m/d H:i:s") . '<br />';
 
-fwrite($chat, $text);
+if ($message !== '') {
+	$status = 'Sucess!';
+	fwrite($chat, $text);
+}
+else {
+	$status = 'Error. No message';
+}
+
 fclose($chat);
 ?>
 <!DOCTYPE html>
@@ -38,8 +45,8 @@ fclose($chat);
 </head>
 <body>
     <div>
-        <h1>Success!</h1>
-        <p>Your message was posted! Click <a href="index.php">here</a> to return.</p>
+        <h1><?php echo $status ?></h1>
+        <p>Click <a href="index.php">here</a> to return.</p>
     </div>
 </body>
 </html>
