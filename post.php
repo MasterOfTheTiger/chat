@@ -20,16 +20,17 @@ if ($_POST['name'] !== '') {
 
 // Scrub user input
 $message = scrub($_POST['message']);
-$name = scrub($_POST['name']);
+$name = scrub($name);
 
-$_SESSION['name'] = $_POST['name'];
+$_SESSION['name'] = $name;
 
 // Add metadata to message
-$text = '"' . $message . '" posted by ' . $name . ' at ' . date("Y/m/d H:i:s") . '<br />';
+$text = '"' . $message . '" posted by ' . $name . ' at ' . date("Y/m/d H:i:s") . "\n";
 
 if ($message !== '') {
-	$status = 'Sucess!';
-	fwrite($chat, $text);
+	$status = 'Success!';
+    fwrite($chat, $text);
+    header('Location: index.php#message');
 }
 else {
 	$status = 'Error. No message';

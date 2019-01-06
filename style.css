@@ -1,0 +1,8 @@
+.aMessage {
+    border-top: solid gray 2px;
+    padding: 10px 0px;
+}
+
+#message {
+    width: 80%;
+}

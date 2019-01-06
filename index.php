@@ -8,14 +8,19 @@ session_start();
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <title>MOTT Chat</title>
+    <link href="style.css" rel="stylesheet" />
 </head>
 <body>
+    <div id="information">
+        <p><strong>Note:</strong> all times are in American Eastern Standard Time (EST).</p>
+    </div>
     <div id="messages">
         <?php
         $chat = fopen("chat.txt", "a+") or die("Error upon opening file");
         while(!feof($chat)) {
-          echo fgets($chat) ."<br />";
+          echo "<div class='aMessage'>" . fgets($chat) ."</div>";
         }
         echo fread($chat,filesize("chat.txt"));
         fclose($chat);
@@ -25,12 +30,14 @@ session_start();
         <p>Name:</p>
         <input type="text" name="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
         <p>Message</p>
-        <textarea name="message" rows="4" cols="50"></textarea>
-        <br />
+        <input type="text" id="message" name="message" autofocus />
         <input type="submit" value="Post Message" />
+        <br /><br />
     </form>
     <footer>
-        &copy; MasterOfTheTiger 2018
+        &copy; MasterOfTheTiger 2018, 2019. <a href="https://github.com/MasterOfTheTiger/chat">See this project on GitHub</a>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
