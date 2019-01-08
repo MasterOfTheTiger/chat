@@ -21,6 +21,8 @@ if ($_POST['name'] !== '') {
 // Scrub user input
 $message = scrub($_POST['message']);
 $name = scrub($name);
+$name = explode(' ', $name);
+$name = implode('_', $name);
 
 $_SESSION['name'] = $name;
 

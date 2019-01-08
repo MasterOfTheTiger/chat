@@ -10,6 +10,7 @@ session_start();
     <meta charset="utf-8" />
     <meta name=viewport content="width=device-width, initial-scale=1">
     <title>MOTT Chat</title>
+    <link rel="shortcut icon" type="image/png" href="chat.png"/>
     <link href="style.css" rel="stylesheet" />
 </head>
 <body>
@@ -20,7 +21,7 @@ session_start();
         <?php
         $chat = fopen("chat.txt", "a+") or die("Error upon opening file");
         while(!feof($chat)) {
-          echo "<div class='aMessage'>" . fgets($chat) ."</div>";
+          echo "<div class=\"aMessage\">" . fgets($chat) ."</div>";
         }
         echo fread($chat,filesize("chat.txt"));
         fclose($chat);
