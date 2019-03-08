@@ -1,7 +1,7 @@
 <?php
 header("X-Frame-Options: DENY");
 header("Content-Security-Policy: frame-ancestors 'none'", false);
-session_start(); 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ session_start();
         <br /><br />
     </form>
     <footer>
-        MOTT Chat code &copy; MasterOfTheTiger 2018, 2019. <a href="https://github.com/MasterOfTheTiger/chat">See this project on GitHub</a>
+        <a href="http://chat.mtiger.xyz">MOTT Chat</a> code &copy; MasterOfTheTiger 2018, 2019. <a href="https://github.com/MasterOfTheTiger/chat">See this project on GitHub</a>
     </footer>
 
     <script src="script.js"></script>
