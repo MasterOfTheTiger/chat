@@ -1,6 +1,6 @@
 window.onload = function() {
     if (Notification.permission === 'granted') {
-        
+
     } else {
         Notification.requestPermission().then(function (result) {
             console.log(result);
@@ -10,7 +10,7 @@ window.onload = function() {
             }
         });
     }
-    
+
 }
 
 let chatCache = document.getElementById('messages').innerHTML;
@@ -32,8 +32,8 @@ const updateChat = function () {
 
         let chat = await response.text();
 
-        if (chat == chatCache) {
-            
+        if (chat.replace(/\s/g,'') == chatCache.replace(/\s/g,'')) {
+
         } else {
             document.getElementById('messages').innerHTML = chat;
             var notification = new Notification('MOTT Chat', { body: 'There is a new message!', icon: 'chat.png ' });
@@ -44,4 +44,4 @@ const updateChat = function () {
     })();
 }
 
-setInterval(updateChat, 1500);
+setInterval(updateChat, 2500);
