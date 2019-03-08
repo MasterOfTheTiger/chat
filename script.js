@@ -36,9 +36,13 @@ const updateChat = function () {
 
         } else {
             document.getElementById('messages').innerHTML = chat;
-            var notification = new Notification('MOTT Chat', { body: 'There is a new message!', icon: 'chat.png ' });
+            let chatEl = document.createElement('html');
+            chatEl.innerHTML = chat;
+            chatEl = chatEl.getElementsByClassName('aMessage');
+            let theLength = chatEl.length;
+            let lastMessage = chatEl[theLength - 2].innerHTML;
+            var notification = new Notification('MOTT Chat', { body: lastMessage, icon: 'chat.png ' });
             setTimeout(notification.close.bind(notification), 4000);
-            console.log('Not the same, sending notification.')
             chatCache = chat;
         }
     })();
