@@ -36,7 +36,7 @@ session_start();
         <br /><br />
     </form>
     <footer>
-        &copy; MasterOfTheTiger 2018, 2019. <a href="https://github.com/MasterOfTheTiger/chat">See this project on GitHub</a>
+        MOTT Chat code &copy; MasterOfTheTiger 2018, 2019. <a href="https://github.com/MasterOfTheTiger/chat">See this project on GitHub</a>
     </footer>
 
     <script src="script.js"></script>
