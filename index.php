@@ -15,7 +15,7 @@ session_start();
 </head>
 <body>
     <div id="information">
-        <p><strong>Note:</strong> all times are in American Eastern Standard Time (EST).</p>
+        <p><strong>Note:</strong> all times are in UTC.</p>
     </div>
     <div id="messages">
         <?php

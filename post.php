@@ -11,7 +11,7 @@ function scrub($input) {
     return $splitted;
 }
 
-date_default_timezone_set("America/New_York");
+date_default_timezone_set("UTC");
 $chat = fopen('chat.txt', 'a') or die('Error upon opening file');
 $name = 'anonymous';
 if ($_POST['name'] !== '') {
