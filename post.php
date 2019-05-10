@@ -30,12 +30,13 @@ $_SESSION['name'] = $name;
 $text = '"' . $message . '" posted by ' . $name . ' on ' . date("Y-m-d"). ' at ' . date("H:i:s") . "\n";
 
 if ($message !== '') {
-	$status = 'Success!';
+    $status = 'Success!';
     fwrite($chat, $text);
     header('Location: index.php#message');
 }
 else {
-	$status = 'Error. No message';
+    $status = 'Error. No message';
+    header('Location: index.php#message');
 }
 
 fclose($chat);
