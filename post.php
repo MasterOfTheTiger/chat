@@ -1,6 +1,7 @@
 <?php
 header("X-Frame-Options: DENY");
 header("Content-Security-Policy: frame-ancestors 'none'", false);
+header("Content-Type: application/json; charset=UTF-8");
 session_start();
 
 function scrub($input) {
@@ -11,15 +12,26 @@ function scrub($input) {
     return $splitted;
 }
 
+// Process the data as JSON if using POST -- otherwise it should do something else, I haven't decided yet
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $data = json_decode(file_get_contents("php://input"), false);
+    print_r($data);
+}
+
+// Cast the object to an array
+$data = (array) $data;
+
 date_default_timezone_set("UTC");
 $chat = fopen('chat.txt', 'a') or die('Error upon opening file');
+
 $name = 'anonymous';
 if ($_POST['name'] !== '') {
-    $name = $_POST['name'];
+    $name = $data['name'];
 }
 
 // Scrub user input
-$message = scrub($_POST['message']);
+$message = scrub($data['message']);
 $name = scrub($name);
 $name = explode(' ', $name);
 $name = implode('_', $name);
@@ -32,25 +44,12 @@ $text = '"' . $message . '" posted by ' . $name . ' on ' . date("Y-m-d"). ' at '
 if ($message !== '') {
     $status = 'Success!';
     fwrite($chat, $text);
-    header('Location: index.php#message');
 }
 else {
     $status = 'Error. No message';
-    header('Location: index.php#message');
 }
+
+echo $status
 
 fclose($chat);
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Posted to MOTT Chat</title>
-</head>
-<body>
-    <div>
-        <h1><?php echo $status ?></h1>
-        <p>Click <a href="index.php">here</a> to return.</p>
-    </div>
-</body>
-</html>

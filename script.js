@@ -1,6 +1,6 @@
 window.onload = function() {
     if (Notification.permission === 'granted') {
-
+	console.log("We have notifications!")
     } else {
         Notification.requestPermission().then(function (result) {
             console.log(result);
@@ -45,6 +45,37 @@ const updateChat = function () {
             setTimeout(notification.close.bind(notification), 4000);
             chatCache = chat;
         }
+    })();
+}
+
+const sendMessage = function () {
+    (async () => {
+	const data = {
+	    'name': document.getElementById('name').value,
+	    'message': document.getElementById('message').value
+	};
+	console.log(data)
+	
+	class HTTPError extends Error { };
+
+	let response = await fetch('post.php', {
+	    method: 'POST',
+	    headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(data)
+	});
+
+	if (!response.ok) {
+            throw new HTTPError('Fetch error:', response.statusText);
+        }
+
+	
+	let text = await response.text();
+
+	console.log(text);
+
     })();
 }
 

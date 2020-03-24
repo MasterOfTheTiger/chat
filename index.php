@@ -27,16 +27,14 @@ session_start();
         fclose($chat);
         ?>
     </div>
-    <form action="post.php" method="POST">
         <p>Name:</p>
-        <input type="text" name="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
+        <input type="text" id="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
         <p>Message</p>
-        <input type="text" id="message" name="message" autofocus />
-        <input type="submit" value="Post Message" />
+        <input type="text" id="message" autofocus />
+        <button onclick="sendMessage()">Send</button>
         <br /><br />
-    </form>
     <footer>
-        <a href="http://chat.mtiger.xyz">MOTT Chat</a> code &copy; MasterOfTheTiger 2018, 2019. <a href="https://code.theres.life/M/chat">See source code</a>
+         <a href="#">MOTT Chat</a> code &copy; MasterOfTheTiger 2018, 2019, 2020. <a href="https://github.com/masterofthetiger/chat">See source code</a>
     </footer>
 
     <script src="script.js"></script>
