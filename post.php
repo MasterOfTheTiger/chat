@@ -49,7 +49,7 @@ else {
     $status = 'Error. No message';
 }
 
-echo $status
+echo $status;
 
 fclose($chat);
 ?>
