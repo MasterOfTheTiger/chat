@@ -13,10 +13,17 @@ function scrub($input) {
 }
 
 // Process the data as JSON if using POST -- otherwise it should do something else, I haven't decided yet
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    $data = json_decode(file_get_contents("php://input"), false);
-    print_r($data);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['type'] == "nojs") {
+        $data['name'] = $_POST['name'];
+        $data['message'] = $_POST['message'];
+
+        header('Location: nojs.php#message');
+    } else {
+    
+        $data = json_decode(file_get_contents("php://input"), false);
+        print_r($data);
+    }
 }
 
 // Cast the object to an array

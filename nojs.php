@@ -1,3 +1,4 @@
+<!--The legacy interface that supports lack of JS -->
 <?php
 header("X-Frame-Options: DENY");
 header("Content-Security-Policy: frame-ancestors 'none'", false);
@@ -11,10 +12,19 @@ session_start();
     <meta name=viewport content="width=device-width, initial-scale=1">
     <title>MOTT Chat</title>
     <link rel="shortcut icon" type="image/png" href="chat.png"/>
-    <link href="style.css" rel="stylesheet" />
+
+    <style>
+         .message {
+            border-top: solid gray 2px;
+            padding: 10px 0px;
+        }
+
+        #message {
+            width: 80%;
+        }
+    </style>
 </head>
 <body>
-    <noscript><a href="nojs.php">No JavaScript? Try the JS-free page here</a></noscript>
     <div id="information">
         <p><strong>Note:</strong> all times are in UTC.</p>
     </div>
@@ -28,16 +38,20 @@ session_start();
         fclose($chat);
         ?>
     </div>
+    <input type="button" value="Refresh" onclick="history.go(0)" />
+    <form action="post.php" method="POST">
         <p>Name:</p>
-        <input type="text" id="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
+        <input type="text" name="name" <?php if ($_SESSION['name'] !== null) {echo 'value=' . $_SESSION['name'];} ?> />
         <p>Message</p>
-        <input type="text" id="message" autofocus />
-        <button onclick="message()">Send</button>
+        <input type="text" id="message" name="message" autofocus />
+        <input type="submit" value="Send" />
+
+        <!-- These don\'t actually get displayed to the user, but they are sent along with the request-->
+        <input type="checkbox" name="type" value="nojs" style="display:none" checked/>
         <br /><br />
+    </form>
     <footer>
          <a href="#">MOTT Chat</a> code &copy; MasterOfTheTiger 2018, 2019, 2020. <a href="https://github.com/masterofthetiger/chat">See source code</a>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

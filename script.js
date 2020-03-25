@@ -1,3 +1,6 @@
+const APPNAME = "MOTT Chat"
+
+// Get notification access
 window.onload = function() {
     if (Notification.permission === 'granted') {
 	console.log("We have notifications!")
@@ -13,46 +16,13 @@ window.onload = function() {
 
 }
 
-let chatCache = document.getElementById('messages').innerHTML;
+// Some API-related functions for sending data to the server
 
-const updateChat = function () {
-    (async () => {
-        class HTTPError extends Error { }
-
-        let response = await fetch('getchat.php', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/text'
-            }
-        });
-
-        if (!response.ok) {
-            throw new HTTPError('Fetch error:', response.statusText);
-        }
-
-        let chat = await response.text();
-
-        if (chat.replace(/\s/g,'') == chatCache.replace(/\s/g,'')) {
-
-        } else {
-            document.getElementById('messages').innerHTML = chat;
-            let chatEl = document.createElement('html');
-            chatEl.innerHTML = chat;
-            chatEl = chatEl.getElementsByClassName('aMessage');
-            let theLength = chatEl.length;
-            let lastMessage = chatEl[theLength - 2].innerHTML;
-            var notification = new Notification('MOTT Chat', { body: lastMessage, icon: 'chat.png ' });
-            setTimeout(notification.close.bind(notification), 4000);
-            chatCache = chat;
-        }
-    })();
-}
-
-const sendMessage = function () {
+const sendMessage = function (name, message) {
     (async () => {
 	const data = {
-	    'name': document.getElementById('name').value,
-	    'message': document.getElementById('message').value
+	    'name': name,
+	    'message': message
 	};
 	console.log(data)
 	
@@ -74,9 +44,77 @@ const sendMessage = function () {
 	
 	let text = await response.text();
 
-	console.log(text);
+	return text;
 
     })();
 }
 
+// Variables for state-saving
+
+let chatCache = document.getElementById('messages').innerHTML;
+
+// Chat updater that is in between DOM and API
+
+const updateChat = function () {
+    (async () => {
+        class HTTPError extends Error { }
+
+        let response = await fetch('getchat.php', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/text'
+            }
+        });
+
+        if (!response.ok) {
+            throw new HTTPError('Fetch error:', response.statusText);
+        }
+
+        chat = await response.text();
+
+	if (chat.replace(/\s/g,'') == chatCache.replace(/\s/g,'')) {
+
+	} else {
+            document.getElementById('messages').innerHTML = chat;
+            let chatEl = document.createElement('html');
+            chatEl.innerHTML = chat;
+            chatEl = chatEl.getElementsByClassName('aMessage');
+
+            let theLength = chatEl.length;
+            let lastMessage = chatEl[theLength - 2].innerHTML;
+            var notification = new Notification(APPNAME, { body: lastMessage, icon: 'chat.png ' });
+            setTimeout(notification.close.bind(notification), 4000);
+            chatCache = chat;
+	}
+    }
+    )();
+}
+
+// The DOM stuff that interacts with the web stuff
+
 setInterval(updateChat, 2500);
+
+const message = function () {
+    let name = document.getElementById('name').value;
+    let message = document.getElementById('message').value;
+
+    if message == '' {
+	return
+    }
+
+    sendMessage(
+	name,
+	message
+    );
+    document.getElementById('message').value = '';
+}
+
+// Manage keypresses
+
+const node = document.getElementById('message');
+node.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        message();
+    }
+});
+
