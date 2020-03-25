@@ -78,7 +78,7 @@ const updateChat = function () {
             document.getElementById('messages').innerHTML = chat;
             let chatEl = document.createElement('html');
             chatEl.innerHTML = chat;
-            chatEl = chatEl.getElementsByClassName('aMessage');
+            chatEl = chatEl.getElementsByClassName('message');
 
             let theLength = chatEl.length;
             let lastMessage = chatEl[theLength - 2].innerHTML;
@@ -98,7 +98,7 @@ const message = function () {
     let name = document.getElementById('name').value;
     let message = document.getElementById('message').value;
 
-    if message == '' {
+    if (message == '') {
 	return
     }
 
