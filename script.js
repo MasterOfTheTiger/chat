@@ -106,6 +106,47 @@ const message = function () {
     document.getElementById('message').value = '';
 }
 
+// Other DOM stuff
+
+const localizeTime = function () {
+    let chatroomEl = document.getElementById('messages');
+
+    let messages = chatroomEl.getElementsByClassName('message');
+    console.log(messages)
+
+    let container = document.createElement('div');
+
+    for (let i = 0; i < messages.length-1; i++) {
+	m = messages[i].innerHTML;
+
+	let stringTime = m.split('<date>')[1].split('</date>')[0];
+	let time = new Date(stringTime);
+	time = convertUTCDateToLocalDate(time).toLocaleString();
+	console.log(time);
+
+	messageEl = document.createElement('div');
+	messageEl.className = 'message';
+	messageEl.innerHTML = m.split(stringTime).join(time);
+
+	container.appendChild(messageEl)
+    }
+
+    document.getElementById('messages').innerHTML = container.innerHTML;
+}
+
+// Copied from https://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time/18330682#18330682
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;   
+}
+
+
 // Manage keypresses
 
 const node = document.getElementById('message');

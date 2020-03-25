@@ -5,7 +5,16 @@ body {
 .message {
     border-top: solid gray 2px;
     padding: 10px 0px;
+}
+.message message {
     font-weight: bold;
+}
+.message name::after {
+    content: ": ";
+}
+
+.message date {
+    float: right;
 }
 
 #message {

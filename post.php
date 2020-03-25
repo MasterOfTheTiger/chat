@@ -46,7 +46,7 @@ $name = implode('_', $name);
 $_SESSION['name'] = $name;
 
 // Add metadata to message
-$text = '"' . $message . '" posted by ' . $name . ' on ' . date("Y-m-d"). ' at ' . date("H:i:s") . "\n";
+$text = '<name>' . $name . '</name>' . '<message>' . $message . '</message>  <date>' . date("Y-m-d") . 'T' . date("H:i:s") . "</date>\n";
 
 if ($message !== '') {
     $status = 'Success!';

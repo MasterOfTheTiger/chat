@@ -12,17 +12,7 @@ session_start();
     <meta name=viewport content="width=device-width, initial-scale=1">
     <title>MOTT Chat</title>
     <link rel="shortcut icon" type="image/png" href="chat.png"/>
-
-    <style>
-         .message {
-            border-top: solid gray 2px;
-            padding: 10px 0px;
-        }
-
-        #message {
-            width: 80%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div id="information">
