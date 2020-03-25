@@ -1,6 +1,11 @@
+body {
+    font-family: arial;
+}
+
 .message {
     border-top: solid gray 2px;
     padding: 10px 0px;
+    font-weight: bold;
 }
 
 #message {

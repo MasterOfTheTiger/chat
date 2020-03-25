@@ -7,6 +7,6 @@ $chat = fopen("chat.txt", "a+") or die("Error upon opening file");
 while(!feof($chat)) {
     echo "<div class=\"message\">" . fgets($chat) ."</div>";
 }
-echo fread($chat,filesize("chat.txt"));
+
 fclose($chat);
 ?>

@@ -41,10 +41,7 @@ const sendMessage = function (name, message) {
             throw new HTTPError('Fetch error:', response.statusText);
         }
 
-	
 	let text = await response.text();
-
-	return text;
 
     })();
 }
