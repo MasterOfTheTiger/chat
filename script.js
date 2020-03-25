@@ -78,10 +78,13 @@ const updateChat = function () {
             chatEl = chatEl.getElementsByClassName('message');
 
             let theLength = chatEl.length;
-            let lastMessage = chatEl[theLength - 2].innerHTML;
-            var notification = new Notification(APPNAME, { body: lastMessage, icon: 'chat.png ' });
-            setTimeout(notification.close.bind(notification), 4000);
+	    lastName = chatEl[theLength - 2].getElementsByTagName('name')[0].innerText;
+            let lastMessage = chatEl[theLength - 2].getElementsByTagName('message')[0].innerText;
+            var notification = new Notification(lastName, { body: lastMessage, icon: 'chat.png ' });
+            setTimeout(notification.close.bind(notification), 5000);
             chatCache = chat;
+
+	    localizeTime();
 	}
     }
     )();
