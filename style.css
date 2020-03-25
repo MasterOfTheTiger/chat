@@ -1,8 +1,34 @@
-.aMessage {
+.message {
     border-top: solid gray 2px;
     padding: 10px 0px;
 }
 
 #message {
     width: 80%;
+}
+
+/* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
+button {
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #d8d8d8;
+    padding: 6px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #efefef;
+    font-size: 13px;
+    font-family: arial;
+    border-width: thin;
+}
+button:hover {
+    background-color: #d8d8d8;
+    cursor: default;
+}
+select {
+    border-color: #d8d8d8;
+    background-color: #efefef;
+    border-style: solid;
+    border-width: thin;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
